@@ -17,6 +17,4 @@ public class Question {
     private String option4;
     private String questionTitle;
     private String rightAnswer;
-
-
 }

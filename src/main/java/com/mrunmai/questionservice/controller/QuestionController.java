@@ -1,6 +1,8 @@
 package com.mrunmai.questionservice.controller;
 
 import com.mrunmai.questionservice.model.Question;
+import com.mrunmai.questionservice.model.QuestionWrapper;
+import com.mrunmai.questionservice.model.Response;
 import com.mrunmai.questionservice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +30,20 @@ public class QuestionController {
     @PostMapping("add")
     public ResponseEntity<String> addQuestion(@RequestBody Question question){
         return questionService.addQuestion(question);
+    }
+
+    @GetMapping("generate")
+    public ResponseEntity<List<Integer>> getQuestionForQuiz(@RequestParam String categoryName,@RequestParam Integer numQuestions){
+        return  questionService.getQuestionForQuiz(categoryName,numQuestions);
+    }
+
+    @PostMapping("getQuestions")
+    public ResponseEntity<List<QuestionWrapper>> getQuestionsFromId(@RequestBody List<Integer> questionIds){
+        return questionService.getQuestionsFromId(questionIds);
+    }
+
+    @PostMapping("getScore")
+    public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+        return questionService.getScore(responses);
     }
 }
